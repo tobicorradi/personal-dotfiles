@@ -35,14 +35,15 @@ exec --no-startup-id /usr/lib/gsd-xsettings
 set $refresh_i3status killall -SIGUSR1 i3status
 
 # Pulse Audio controls
-bindsym XF86WakeUp+F3 exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-
+# Volume
+bindsym Mod1+F3 exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
+bindsym Mod1+F2 exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
+bindsym Mod1+F1 exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-
+bindsym Mod1+F5 exec light -U 5 # decrease screen brightness
+bindsym Mod1+F6 exec light -A 5 # increase screen brightness
+bindsym Mod1+F7 exec redshift -O 4500
+bindsym Mod1+F8 exec redshift -x
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
@@ -120,10 +121,10 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "dev"
-set $ws2 "firefox"
-set $ws3 "telegram/discord"
-set $ws4 "extra"
-set $ws5 "5"
+set $ws2 "terminal"
+set $ws3 "firefox"
+set $ws4 "telegram/discord"
+set $ws5 "bg/process"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -135,7 +136,7 @@ bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace number $ws5
+bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
@@ -223,5 +224,5 @@ smart_gaps on
 for_window [class="^.*"] border pixel 3
 
 exec feh --bg-fill /home/toby/Downloads/wallpaper.jpg
-exec redshift
+exec --no-startup-id terminal -e 'redshift -O 4500'
 exec picom --experimental-backends --config ~/.config/picom.conf
