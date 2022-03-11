@@ -121,8 +121,8 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "dev"
-set $ws2 "terminal"
-set $ws3 "firefox"
+set $ws2 "internet"
+set $ws3 "terminal"
 set $ws4 "telegram/discord"
 set $ws5 "bg/process"
 set $ws6 "6"
@@ -154,6 +154,18 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Screenshots
+#interactive screenshot by pressing printscreen
+bindsym Print exec gnome-screenshot -i 
+#crop-area screenshot by pressing Mod + printscreen
+bindsym $mod+Print exec gnome-screenshot -a
+
+#Open Chrome
+bindsym $mod+q exec /usr/bin/google-chrome-stable --force-device-scale-factor=1.2
+
+#Open Figma
+bindsym $mod+c exec figma-linux
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -193,12 +205,12 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 
 # Color config
-set $bg-color 	         #2f343f
+set $bg-color 	         #211d1e
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
-set $blue-color          #5DA8F4
+set $blue-color          #e3846f
 
 bar {
         # Bar program
@@ -214,15 +226,16 @@ bar {
 		#                  border             background         text
 		focused_workspace  $bg-color          $bg-color          $text-color
 		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-	        urgent_workspace   $blue-color   $blue-color   $text-color
+                urgent_workspace   $blue-color   $blue-color   $text-color
         }
 }
-gaps outer 14
+gaps outer 2
 gaps inner 10
 smart_gaps on
 
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 0
 
-exec feh --bg-fill /home/toby/Downloads/wallpaper.jpg
+exec feh --bg-fill /home/toby/Downloads/wallpapers/waves.png
 exec --no-startup-id terminal -e 'redshift -O 4500'
 exec picom --experimental-backends --config ~/.config/picom.conf
+exec wal -n -i ~/Downloads/wallpapers/waves.png

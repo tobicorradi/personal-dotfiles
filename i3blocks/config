@@ -27,7 +27,7 @@
 command=/usr/share/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
-
+color= red
 # Volume indicator
 #
 # The first parameter sets the step (and units to display)
@@ -55,10 +55,10 @@ signal=10
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
-# [memory]
-# label=MEM
-# separator=false
-# interval=30
+[memory]
+label=MEM
+separator=false
+interval=30
 
 # [memory]
 # label=SWAP
@@ -84,13 +84,11 @@ interval=30
 #instance=wlan0
 label=
 interval=10
-separator=false
 
 [wifi]
 #instance=wlp3s0
 label=
 interval=10
-separator=false
 
 # [bandwidth]
 # #instance=eth0
@@ -100,11 +98,11 @@ separator=false
 #
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
-# [cpu_usage]
-# label=CPU
-# interval=10
-# min_width=CPU: 100.00%
-#separator=false
+[cpu_usage]
+label=CPU
+interval=10
+min_width=CPU: 100.00%
+separator=true
 
 [load_average]
 label=
